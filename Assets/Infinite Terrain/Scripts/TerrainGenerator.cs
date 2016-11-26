@@ -116,7 +116,7 @@ public class TerrainGenerator : MonoBehaviour {
         GameObject tree1 =
 			(GameObject)Instantiate(tree, new Vector3(x * planeSize,heightHigh*heightScale , z * planeSize), Quaternion.identity);
 		GameObject rock1 =
-			(GameObject)Instantiate(rock, new Vector3(x * planeSize,heightHigh*heightScale , z * planeSize), Quaternion.identity);
+			(GameObject)Instantiate(rock, new Vector3(x * planeSize + 10 ,200, z * planeSize + 10), Quaternion.identity);
 
         // Place assets inside a holder.
 
