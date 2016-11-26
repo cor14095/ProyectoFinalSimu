@@ -16,6 +16,8 @@ public class TerrainGenerator : MonoBehaviour {
 
     // the 10x10 vertex default plane in Unity
     public Object terrainPlane;
+	//assets to inster
+	public GameObject tree;
 
     // (buffer * 2 + 1)^2 will be total number of planes in the scene at any one time
     public int buffer;
@@ -71,23 +73,30 @@ public class TerrainGenerator : MonoBehaviour {
 
     // Given a world tile x and tile z this generates a Tile object.
     private Tile GenerateTile(int x, int z) {
+		
         GameObject plane =
                     (GameObject)Instantiate(terrainPlane, new Vector3(x * planeSize, 0, z * planeSize), Quaternion.identity);
         plane.transform.localScale = new Vector3(planeSize * 0.1f, 1, planeSize * 0.1f);
         plane.transform.parent = transform;
 
+
         // Get the planes vertices
         Mesh mesh = plane.GetComponent<MeshFilter>().mesh;
         Vector3[] vertices = mesh.vertices;
-
+		float heightHigh = 0;
         // alter vertex Y position depending on simplex noise)
         for (int v = 0; v < vertices.Length; v++) {
             // generate the height for current vertex
             Vector3 vertexPosition = plane.transform.position + vertices[v] * planeSize / 10f;
             float height = SimplexNoise.Noise(vertexPosition.x * detailScale, vertexPosition.z * detailScale);
+			if (heightHigh < height) {
+				heightHigh = height;
+			}
             // scale it with the heightScale field
             vertices[v].y = height * heightScale;
         }
+		GameObject tree1 =
+			(GameObject)Instantiate(tree, new Vector3(x * planeSize,heightHigh*heightScale , z * planeSize), Quaternion.identity);
 
         mesh.vertices = vertices;
         mesh.RecalculateBounds();
@@ -118,6 +127,7 @@ public class TerrainGenerator : MonoBehaviour {
         if (changeX != 0) {
             for (i = 0; i < planeCount; i++) {
                 Destroy(terrainTiles[buffer - buffer * changeX, i].gameObject);
+
                 terrainTiles[buffer - buffer * changeX, i] = null;
                 newTiles[i] = GenerateTile(tileX + buffer * changeX + changeX, tileZ - buffer + i);
             }
