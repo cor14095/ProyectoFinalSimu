@@ -19,6 +19,8 @@ public class TerrainGenerator : MonoBehaviour {
 	//assets to inster
 	public GameObject tree;
 
+	public GameObject rock;
+
     // (buffer * 2 + 1)^2 will be total number of planes in the scene at any one time
     public int buffer;
 
@@ -43,6 +45,10 @@ public class TerrainGenerator : MonoBehaviour {
 
     // Object to hold the Trees
     private GameObject treeHolder;
+	// Object to hold the rocks
+	private GameObject rockHolder;
+
+
 
     // Use this for initialization
     void Start() {
@@ -50,6 +56,8 @@ public class TerrainGenerator : MonoBehaviour {
         // Object to hold the Trees
         treeHolder = new GameObject();
         treeHolder.name = "Trees";
+		rockHolder = new GameObject ();
+		rockHolder.name = "Rocks";
 
         planeCount = buffer * 2 + 1;
         tileX = Mathf.RoundToInt(target.position.x / planeSize);
@@ -104,12 +112,16 @@ public class TerrainGenerator : MonoBehaviour {
             vertices[v].y = height * heightScale;
         }
 
-        // Create trees
+        // Create assets
         GameObject tree1 =
 			(GameObject)Instantiate(tree, new Vector3(x * planeSize,heightHigh*heightScale , z * planeSize), Quaternion.identity);
+		GameObject rock1 =
+			(GameObject)Instantiate(rock, new Vector3(x * planeSize,heightHigh*heightScale , z * planeSize), Quaternion.identity);
 
-        // Place trees inside a holder.
+        // Place assets inside a holder.
+
         tree1.transform.parent = treeHolder.transform;
+		rock1.transform.parent = rockHolder.transform;
 
         mesh.vertices = vertices;
         mesh.RecalculateBounds();
