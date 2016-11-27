@@ -48,7 +48,6 @@ public class TerrainGenerator : MonoBehaviour {
 
     public GameObject tiger;
     public GameObject rex;
-    public GameObject horse;
     public GameObject iguana;
     // Assets summary:
     // - 6 trees.
