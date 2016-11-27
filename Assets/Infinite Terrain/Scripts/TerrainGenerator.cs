@@ -16,9 +16,9 @@ public class TerrainGenerator : MonoBehaviour {
 
     // the 10x10 vertex default plane in Unity
     public Object terrainPlane;
-	//assets to inster
+	//assets to insert
 	public GameObject tree;
-
+	public GameObject rock;
     // (buffer * 2 + 1)^2 will be total number of planes in the scene at any one time
     public int buffer;
 
@@ -107,10 +107,11 @@ public class TerrainGenerator : MonoBehaviour {
         // Create trees
         GameObject tree1 =
 			(GameObject)Instantiate(tree, new Vector3(x * planeSize,heightHigh*heightScale , z * planeSize), Quaternion.identity);
-
+		GameObject rock1 =
+			(GameObject)Instantiate(rock, new Vector3(x * planeSize,100 , z * planeSize), Quaternion.identity);
         // Place trees inside a holder.
         tree1.transform.parent = objectHolder.transform;
-
+		rock1.transform.parent = objectHolder.transform;
         mesh.vertices = vertices;
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
