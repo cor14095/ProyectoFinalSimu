@@ -43,5 +43,5 @@ public class animalsAI : MonoBehaviour {
         }
         // Then we must move the animal.
         transform.position += transform.forward * 0.1f;
-    }
+		}
 }

@@ -275,7 +275,6 @@ public class TerrainGenerator : MonoBehaviour {
         mesh.RecalculateNormals();
 
         plane.AddComponent<MeshCollider>();
-		plane.GetComponent<MeshCollider> ().convex = true;
 
         Tile tile = new Tile();
         tile.gameObject = plane;
