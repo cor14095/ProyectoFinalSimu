@@ -42,14 +42,14 @@ public class TerrainGenerator : MonoBehaviour {
     private Tile[,] terrainTiles;
 
     // Object to hold the Trees
-    private GameObject treeHolder;
+    private GameObject objectHolder;
 
     // Use this for initialization
     void Start() {
 
         // Object to hold the Trees
-        treeHolder = new GameObject();
-        treeHolder.name = "Trees";
+        objectHolder = new GameObject();
+        objectHolder.name = "Objects";
 
         planeCount = buffer * 2 + 1;
         tileX = Mathf.RoundToInt(target.position.x / planeSize);
@@ -109,7 +109,7 @@ public class TerrainGenerator : MonoBehaviour {
 			(GameObject)Instantiate(tree, new Vector3(x * planeSize,heightHigh*heightScale , z * planeSize), Quaternion.identity);
 
         // Place trees inside a holder.
-        tree1.transform.parent = treeHolder.transform;
+        tree1.transform.parent = objectHolder.transform;
 
         mesh.vertices = vertices;
         mesh.RecalculateBounds();
@@ -200,4 +200,11 @@ public class Tile {
     public GameObject gameObject;
     public int tileX;
     public int tileZ;
+}
+
+public class Pack {
+    public GameObject obj1;
+    public GameObject obj2;
+    public GameObject obj3;
+    public GameObject obj4;
 }
