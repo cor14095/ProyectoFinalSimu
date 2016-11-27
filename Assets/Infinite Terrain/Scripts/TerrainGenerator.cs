@@ -165,8 +165,9 @@ public class TerrainGenerator : MonoBehaviour {
 			(GameObject)Instantiate(rock, new Vector3(x * planeSize,100 , z * planeSize), Quaternion.identity);
             */
         // Place trees inside a holder.
-        tree1.transform.parent = objectHolder.transform;
-		rock1.transform.parent = objectHolder.transform;
+        //tree1.transform.parent = objectHolder.transform;
+		//rock1.transform.parent = objectHolder.transform;
+
         mesh.vertices = vertices;
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
