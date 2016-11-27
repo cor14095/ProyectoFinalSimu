@@ -11,14 +11,53 @@ using Object = UnityEngine.Object;
 /// </summary>
 public class TerrainGenerator : MonoBehaviour {
 
-    // target to track;
+    // A container class.
+    public class Pack
+    {
+        // From your sister!!!
+        public GameObject obj1;
+        public GameObject obj2;
+        public GameObject obj3;
+        public GameObject obj4;
+    }
+
+    // Target to track;
     public Transform target;
 
-    // the 10x10 vertex default plane in Unity
+    // The 10x10 vertex default plane in Unity
     public Object terrainPlane;
-	//assets to insert
-	public GameObject tree;
-	public GameObject rock;
+	
+    // Assets to insert
+	public GameObject tree1;
+    public GameObject tree2;
+    public GameObject tree3;
+    public GameObject tree4;
+    public GameObject tree5;
+    public GameObject tree6;
+
+    public GameObject bush;
+
+    public GameObject rock1;
+    public GameObject rock2;
+    public GameObject rock3;
+    public GameObject rock4;
+
+    public GameObject house;
+    public GameObject gazebo;
+    public GameObject logHollow;
+
+    public GameObject tiger;
+    public GameObject rex;
+    public GameObject horse;
+    public GameObject iguana;
+    // Assets summary:
+    // - 6 trees.
+    // - 1 bush.
+    // - 4 rocks.
+    // - 3 buildings.
+    // - 4 animals.
+    // Total of: 18.
+
     // (buffer * 2 + 1)^2 will be total number of planes in the scene at any one time
     public int buffer;
 
@@ -43,6 +82,7 @@ public class TerrainGenerator : MonoBehaviour {
 
     // Object to hold the Trees
     private GameObject objectHolder;
+    private Pack[] objectsPack;
 
     // Use this for initialization
     void Start() {
@@ -55,6 +95,11 @@ public class TerrainGenerator : MonoBehaviour {
         tileX = Mathf.RoundToInt(target.position.x / planeSize);
         tileZ = Mathf.RoundToInt(target.position.z / planeSize);    
         Generate();
+    }
+
+    // This method is used to generate the random packs from the assets given.
+    void generatePacks() {
+
     }
     
     public void Generate(float detailScale, float heightScale) {
@@ -113,10 +158,12 @@ public class TerrainGenerator : MonoBehaviour {
         }
 
         // Create trees
+        /*
         GameObject tree1 =
 			(GameObject)Instantiate(tree, new Vector3(x * planeSize,heightHigh*heightScale , z * planeSize), Quaternion.identity);
 		GameObject rock1 =
 			(GameObject)Instantiate(rock, new Vector3(x * planeSize,100 , z * planeSize), Quaternion.identity);
+            */
         // Place trees inside a holder.
         tree1.transform.parent = objectHolder.transform;
 		rock1.transform.parent = objectHolder.transform;
@@ -184,8 +231,6 @@ public class TerrainGenerator : MonoBehaviour {
         terrainTiles = newTerrainTiles;
     }
 
-    
-
     // Update is called once per frame
     void Update() {
         int newTileX = Mathf.RoundToInt(target.position.x / planeSize);
@@ -209,11 +254,4 @@ public class Tile {
     public GameObject gameObject;
     public int tileX;
     public int tileZ;
-}
-
-public class Pack {
-    public GameObject obj1;
-    public GameObject obj2;
-    public GameObject obj3;
-    public GameObject obj4;
 }
