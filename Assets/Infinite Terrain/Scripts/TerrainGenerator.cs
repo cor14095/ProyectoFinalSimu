@@ -100,6 +100,7 @@ public class TerrainGenerator : MonoBehaviour {
     // This method is used to generate the random packs from the assets given.
 	void generatePacks(int randPack,float x, float z, float heightHigh) {
 		int randItem = UnityEngine.Random.Range (1, 7);
+		int randAgain = UnityEngine.Random.Range (1, 4);
 		if (randPack == 1) {
 			if (randItem == 1) {
 				GameObject vtree1 =
@@ -184,6 +185,12 @@ public class TerrainGenerator : MonoBehaviour {
 					(GameObject)Instantiate(logHollow, new Vector3(x * planeSize,heightHigh*heightScale , z * planeSize), Quaternion.identity);
 				vlogHollow.transform.parent = objectHolder.transform;
 			}
+		}
+
+		if (randAgain == 1) {
+			Debug.Log ("AGAIN");
+			randPack = UnityEngine.Random.Range (1, 4);
+			generatePacks (randPack, x, z, heightHigh);
 		}
     }
     
