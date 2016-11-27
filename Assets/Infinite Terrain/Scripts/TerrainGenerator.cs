@@ -104,7 +104,7 @@ public class TerrainGenerator : MonoBehaviour {
 		if (randPack == 1) {
 			if (randItem == 1) {
 				GameObject vtree1 =
-					(GameObject)Instantiate (tree1, new Vector3 (x * planeSize, heightHigh * heightScale, z * planeSize), Quaternion.identity);
+					(GameObject)Instantiate (tree1, new Vector3 (x * planeSize + UnityEngine.Random.Range(-20, 20), heightHigh * heightScale, z * planeSize + UnityEngine.Random.Range(-20, 20)), Quaternion.identity);
 				vtree1.transform.parent = objectHolder.transform;
 			} else if (randItem == 2) {
 				GameObject vtree2 =
