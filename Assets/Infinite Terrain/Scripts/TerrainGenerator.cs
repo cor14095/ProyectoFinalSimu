@@ -14,7 +14,7 @@ public class TerrainGenerator : MonoBehaviour {
     // A container class.
     public class Pack
     {
-        // From your sister!!!
+       
         public GameObject obj1;
         public GameObject obj2;
         public GameObject obj3;
@@ -54,8 +54,9 @@ public class TerrainGenerator : MonoBehaviour {
     // - 1 bush.
     // - 4 rocks.
     // - 3 buildings.
-    // - 4 animals.
-    // Total of: 18.
+    // - 2 animals.
+    // Total of: 16.
+
 
     // (buffer * 2 + 1)^2 will be total number of planes in the scene at any one time
     public int buffer;
@@ -97,8 +98,93 @@ public class TerrainGenerator : MonoBehaviour {
     }
 
     // This method is used to generate the random packs from the assets given.
-    void generatePacks() {
+	void generatePacks(int randPack,float x, float z, float heightHigh) {
+		int randItem = UnityEngine.Random.Range (1, 7);
+		if (randPack == 1) {
+			if (randItem == 1) {
+				GameObject vtree1 =
+					(GameObject)Instantiate (tree1, new Vector3 (x * planeSize, heightHigh * heightScale, z * planeSize), Quaternion.identity);
+				vtree1.transform.parent = objectHolder.transform;
+			} else if (randItem == 2) {
+				GameObject vtree2 =
+					(GameObject)Instantiate (tree2, new Vector3 (x * planeSize, heightHigh * heightScale, z * planeSize), Quaternion.identity);
+				vtree2.transform.parent = objectHolder.transform;
+			} else if (randItem == 3) {
+				GameObject vtiger =
+					(GameObject)Instantiate (tiger, new Vector3 (x * planeSize, heightHigh * heightScale, z * planeSize), Quaternion.identity);
+				vtiger.transform.parent = objectHolder.transform;
+			} else if (randItem == 4) {
+				GameObject vrock1 =
+					(GameObject)Instantiate (rock1, new Vector3 (x * planeSize, heightHigh * heightScale, z * planeSize), Quaternion.identity);
+				vrock1.transform.parent = objectHolder.transform;
+			} else if (randItem == 5) {
+				GameObject vbush =
+					(GameObject)Instantiate (bush, new Vector3 (x * planeSize, heightHigh * heightScale, z * planeSize), Quaternion.identity);
+				vbush.transform.parent = objectHolder.transform;
+			} else {
+				GameObject vhouse =
+					(GameObject)Instantiate(house, new Vector3(x * planeSize,heightHigh*heightScale , z * planeSize), Quaternion.identity);
+				vhouse.transform.parent = objectHolder.transform;
+			}
+		}
+		if (randPack == 2) {
+			if (randItem == 1) {
+				GameObject vtree3 =
+					(GameObject)Instantiate (tree3, new Vector3 (x * planeSize, heightHigh * heightScale, z * planeSize), Quaternion.identity);
+				vtree3.transform.parent = objectHolder.transform;
+			} else if (randItem == 2) {
+				GameObject vtree4 =
+					(GameObject)Instantiate (tree4, new Vector3 (x * planeSize, heightHigh * heightScale, z * planeSize), Quaternion.identity);
+				vtree4.transform.parent = objectHolder.transform;
+			} else if (randItem == 3) {
+				GameObject vrex =
+					(GameObject)Instantiate (rex, new Vector3 (x * planeSize, heightHigh * heightScale, z * planeSize), Quaternion.identity);
+				vrex.transform.parent = objectHolder.transform;
+			} else if (randItem == 4) {
+				GameObject vrock2 =
+					(GameObject)Instantiate (rock2, new Vector3 (x * planeSize, heightHigh * heightScale, z * planeSize), Quaternion.identity);
+				vrock2.transform.parent = objectHolder.transform;
+			} else if (randItem == 5) {
+				GameObject vrock3 =
+					(GameObject)Instantiate (rock3, new Vector3 (x * planeSize, heightHigh * heightScale, z * planeSize), Quaternion.identity);
+				vrock3.transform.parent = objectHolder.transform;
+			} else {
+				GameObject vgazebo =
+					(GameObject)Instantiate(gazebo, new Vector3(x * planeSize,heightHigh*heightScale , z * planeSize), Quaternion.identity);
+				vgazebo.transform.parent = objectHolder.transform;
+			}
+		}
+		if (randPack == 3) {
+			if (randItem == 1) {
 
+				GameObject vtree5 =
+					(GameObject)Instantiate (tree5, new Vector3 (x * planeSize, heightHigh * heightScale, z * planeSize), Quaternion.identity);
+				
+				vtree5.transform.parent = objectHolder.transform;
+			} else if (randItem == 2) {
+				
+				GameObject vtree6 =
+					(GameObject)Instantiate (tree6, new Vector3 (x * planeSize, heightHigh * heightScale, z * planeSize), Quaternion.identity);
+				
+				vtree6.transform.parent = objectHolder.transform;
+			} else if (randItem == 3) {
+				GameObject vtiger =
+					(GameObject)Instantiate (tiger, new Vector3 (x * planeSize, heightHigh * heightScale, z * planeSize), Quaternion.identity);
+				vtiger.transform.parent = objectHolder.transform;
+			} else if (randItem == 4) {
+				GameObject vrex =
+					(GameObject)Instantiate (rex, new Vector3 (x * planeSize, heightHigh * heightScale, z * planeSize), Quaternion.identity);
+				vrex.transform.parent = objectHolder.transform;
+			} else if (randItem == 5) {
+				GameObject vrock4 =
+					(GameObject)Instantiate (rock4, new Vector3 (x * planeSize, heightHigh * heightScale, z * planeSize), Quaternion.identity);
+				vrock4.transform.parent = objectHolder.transform;
+			} else {
+				GameObject vlogHollow =
+					(GameObject)Instantiate(logHollow, new Vector3(x * planeSize,heightHigh*heightScale , z * planeSize), Quaternion.identity);
+				vlogHollow.transform.parent = objectHolder.transform;
+			}
+		}
     }
     
     public void Generate(float detailScale, float heightScale) {
@@ -133,7 +219,7 @@ public class TerrainGenerator : MonoBehaviour {
 
     // Given a world tile x and tile z this generates a Tile object.
     private Tile GenerateTile(int x, int z) {
-		
+		int randEmpty = UnityEngine.Random.Range (0, 2); 
         GameObject plane =
                     (GameObject)Instantiate(terrainPlane, new Vector3(x * planeSize, 0, z * planeSize), Quaternion.identity);
         plane.transform.localScale = new Vector3(planeSize * 0.1f, 1, planeSize * 0.1f);
@@ -155,8 +241,16 @@ public class TerrainGenerator : MonoBehaviour {
             // scale it with the heightScale field
             vertices[v].y = height * heightScale;
         }
+		//Choose if ther will be an asset
 
-        // Create trees
+		if (randEmpty!=0) {
+
+			int randPack = UnityEngine.Random.Range (1, 4);
+			generatePacks (randPack, x, z, heightHigh);
+		}
+
+
+        // Create assets
         /*
         GameObject tree1 =
 			(GameObject)Instantiate(tree, new Vector3(x * planeSize,heightHigh*heightScale , z * planeSize), Quaternion.identity);
