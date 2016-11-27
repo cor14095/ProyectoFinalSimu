@@ -58,6 +58,14 @@ public class TerrainGenerator : MonoBehaviour {
     }
     
     public void Generate(float detailScale, float heightScale) {
+
+        // Destroy previous objects so they don't stack.
+        // If you wanna have fun comment this 'foreach'.
+        foreach (Transform child in objectHolder.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+
         this.detailScale = detailScale;
         this.heightScale = heightScale;
         Generate();
