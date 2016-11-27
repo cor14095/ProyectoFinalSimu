@@ -236,11 +236,12 @@ public class TerrainGenerator : MonoBehaviour {
         // Get the planes vertices
         Mesh mesh = plane.GetComponent<MeshFilter>().mesh;
         Vector3[] vertices = mesh.vertices;
-		float heightHigh = 0;
+		float heightHigh = 1;
         // alter vertex Y position depending on simplex noise)
         for (int v = 0; v < vertices.Length; v++) {
             // generate the height for current vertex
             Vector3 vertexPosition = plane.transform.position + vertices[v] * planeSize / 10f;
+			int bump = UnityEngine.Random.Range (0, 10);
             float height = SimplexNoise.Noise(vertexPosition.x * detailScale, vertexPosition.z * detailScale);
 			if (heightHigh < height) {
 				heightHigh = height;
@@ -248,6 +249,7 @@ public class TerrainGenerator : MonoBehaviour {
             // scale it with the heightScale field
             vertices[v].y = height * heightScale;
         }
+
 		//Choose if ther will be an asset
 
 		if (randEmpty!=0) {
@@ -273,6 +275,7 @@ public class TerrainGenerator : MonoBehaviour {
         mesh.RecalculateNormals();
 
         plane.AddComponent<MeshCollider>();
+		plane.GetComponent<MeshCollider> ().convex = true;
 
         Tile tile = new Tile();
         tile.gameObject = plane;
